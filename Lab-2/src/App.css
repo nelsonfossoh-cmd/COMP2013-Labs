@@ -185,8 +185,7 @@
 
 .ResortCards {
   width: 500px;
-  border-radius: 1rem;
-  padding: 1rem;
+  padding: 5px;
 }
 
 .ResortContainer {
@@ -205,8 +204,6 @@
   .ResortCard {
     display: flex;
     width: 90%;
-    justify-content: space-around;
-    align-items: center;
     margin: 10px auto;
   }
 }
