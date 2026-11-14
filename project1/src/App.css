@@ -1,0 +1,55 @@
+.ThriftStore {
+  flex: 1;
+}
+
+.ItemCard {
+  width: 200px;
+  border: 2px solid white;
+  border-radius: 8px;
+  background-color: #0b1020;
+  padding: 5px;
+  text-align: center;
+}
+
+.ItemsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 5px;
+  margin: 5px;
+  justify-content: space-around;
+}
+
+.CheckoutCard {
+  background-color: #0b1020;
+  border: 2px solid white;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.CheckoutContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 5px;
+  margin: 5px;
+  justify-content: space-around;
+}
+
+@media (max-width: 450px) {
+  .ItemsContainer,
+  .CheckoutContainer {
+    flex-direction: column;
+  }
+
+  .ItemCard,
+  .CheckoutCard {
+    display: flex;
+    width: 90%;
+    margin: 10px auto;
+  }
+}
+
+p {
+  margin: 0.2rem 0;
+}
