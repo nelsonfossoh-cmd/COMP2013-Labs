@@ -23,15 +23,15 @@ export default function CheckoutCard({
       <p>{description}</p>
       <p>Size: {size}</p>
       <p>
-        <b>Price</b>: {price}
+        <b>Price</b>: ${price.toFixed(2)}
       </p>
       <p>
         <b>Quantity</b>: {quantity}
       </p>
       <p>
-        <b>Subtotal</b>: {price * quantity}
+        <b>Subtotal</b>: ${(price * quantity).toFixed(2)}
       </p>
-      <button onClick={() => handleDeleteCheckout(id)}>Delete</button>
+      <button onClick={() => handleDeleteCheckout(id)}>Remove</button>
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function ItemCard({
   return (
     <div className="ItemCard">
       <p>{name}</p>
-      <img src={image} alt="" width="150px" border-radius="8px" />
+      <img src={image} alt="" width="150px"/>
       <p>fit: {fit}</p>
       <p>Category: {category}</p>
       <p>Color: {color}</p>

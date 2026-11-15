@@ -2,15 +2,15 @@ import CheckoutCard from "./CheckoutCard";
 import type { CheckoutContainerProps } from "./ThriftHappens";
 
 export default function CheckoutContainer({
-  CheckoutList,
+  checkoutList,
   handleDeleteCheckout,
 }: CheckoutContainerProps) {
   return (
     <div className="CheckoutContainer">
-      {CheckoutList.map((Checkout) => (
+      {checkoutList.map((entry) => (
         <CheckoutCard
-          key={Checkout.id}
-          {...Checkout}
+          key={entry.id}
+          {...entry}
           handleDeleteCheckout={handleDeleteCheckout}
         />
       ))}

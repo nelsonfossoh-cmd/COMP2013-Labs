@@ -6,6 +6,7 @@ import type { ClothingCategory } from "../data/data";
 import type { ClothingSize } from "../data/data";
 import CheckoutContainer from "./CheckoutContainer";
 import { products as initialProducts } from "../data/data";
+import logo from "../assets/images/logo.png";
 
 export interface ItemsContainerProps {
   products: ClothingProduct[];
@@ -42,14 +43,12 @@ export interface CheckoutCardFunctions extends CheckoutCardProps {
 }
 
 export interface CheckoutContainerProps {
-  CheckoutList: CheckoutCardProps[];
+  checkoutList: CheckoutCardProps[];
   handleDeleteCheckout: (id: number) => void;
 }
 
 export default function ThriftHappens() {
   //States
-
-  //1.A state to store the item
 
   //2.A state to handle all the products
   const [products, setProducts] = useState<ClothingProduct[]>(initialProducts);
@@ -57,8 +56,11 @@ export default function ThriftHappens() {
   //3.A state to handle the checkout list
   const [checkoutList, setCheckoutList] = useState<CheckoutCardProps[]>([]);
 
-  //4.A state for the total price
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+  //Calculate TotalPrice
+  const totalPrice = checkoutList.reduce(
+    (sum, entry) => sum + entry.price * entry.quantity,
+    0,
+  );
 
   //Handlers
 
@@ -97,12 +99,10 @@ export default function ThriftHappens() {
     setProducts((prevList) =>
       prevList.map((entry) =>
         entry.id === selectedItem.id
-          ? { ...entry, quantity: quantity - addedQuantity }
+          ? { ...entry, quantity: entry.quantity - addedQuantity }
           : entry,
       ),
     );
-
-    setTotalPrice((previous) => previous + selectedItem.price * addedQuantity);
   };
 
   //2. Handle onClick Event to delete a checkout from a checkout list
@@ -119,10 +119,6 @@ export default function ThriftHappens() {
           ? { ...entry, quantity: entry.quantity + deletingItem.quantity }
           : entry,
       ),
-    );
-
-    setTotalPrice(
-      (previous) => previous - deletingItem.quantity * deletingItem.price,
     );
   };
 
@@ -145,7 +141,7 @@ export default function ThriftHappens() {
   return (
     <div className="ThriftStore">
       <div className="Products">
-        <img src="src\assets\images\logo.png" alt="" width="200px" />
+        <img src={logo} alt="" width="200px" />
         <h1>Thrift Store</h1>
         <ItemsContainer
           products={products}
@@ -155,14 +151,12 @@ export default function ThriftHappens() {
       <div className="Cart">
         <h1>Checkout</h1>
         <button onClick={() => handleEmptyCheckout()}>Empty Checkout</button>
-        {checkoutList.length === 0 && <p>Cart is Empty</p>}
+        {checkoutList.length === 0 && <p>Cart Empty</p>}
         <CheckoutContainer
-          CheckoutList={checkoutList}
+          checkoutList={checkoutList}
           handleDeleteCheckout={handleDeleteCheckout}
         />
-        <h2>
-          Total: ${(checkoutList.length === 0 ? 0 : totalPrice).toFixed(2)}
-        </h2>
+        <h2>Total: ${totalPrice.toFixed(2)}</h2>
       </div>
     </div>
   );
